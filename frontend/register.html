@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register Page</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style/style.css">
+
+</head>
+
+<body>
+
+<div class="nav">
+<img src="image/logo_.png" alt="logo" class="logo">
+</div>
+
+<div class="card">
+
+<form id="registerForm">
+
+<h2>Register Here!</h2>
+
+<label>First Name</label>
+<input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+
+<label>Last Name</label>
+<input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+
+<label>Date of Birth</label>
+<input type="date" id="dob" name="dob" required>
+
+<label>Role</label>
+<select id="role" name="role" required>
+<option selected disabled>Choose</option>
+<option>Student</option>
+<option>Mentor</option>
+</select>
+
+<div class="input-group">
+
+<label>Email</label>
+
+<input type="email" id="email" name="email" placeholder="Enter email" required>
+
+<span class="input-error" id="email-error"></span>
+
+</div>
+
+<p id="email-msg" class="validation"></p>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<div class="password-wrapper">
+<input type="password" id="password" name="password" placeholder="Enter password" required>
+<span class="toggle-password" onclick="togglePassword()">👁</span>
+</div>
+
+<span class="input-error" id="password-error"></span>
+
+</div>
+
+<div class="input-group">
+
+<label>Confirm Password</label>
+
+<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+
+<span class="input-error" id="confirm-error"></span>
+
+</div>
+
+<input type="submit" value="Register" class="btn">
+
+<p class="divider">or register with</p>
+
+<div class="social-login">
+
+<a href="#" class="social-btn">
+<img src="image/google.png" alt="Google">
+</a>
+
+<a href="#" class="social-btn">
+<img src="image/github.png" alt="GitHub">
+</a>
+
+</div>
+
+<p class="login-link">
+Already have account?
+<a href="login.html">Login</a>
+</p>
+
+</form>
+
+</div>
+
+<footer>
+&copy;2026 All rights reserved!
+</footer>
+
+<!-- validation script -->
+<script src="script/script.js"></script>
+
+<!-- register API script -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const form = document.getElementById("registerForm");
+
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const user = {
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    dob: document.getElementById("dob").value,
+    role: document.getElementById("role").value,
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value
+};
+
+fetch("http://localhost:8080/api/register", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(user)
+})
+.then(response => response.text())
+.then(data => {
+
+    data = data.trim();   // remove spaces or newline
+
+    if(data.includes("User registered successfully")){
+
+        // clear form
+        form.reset();
+
+        // redirect to login page
+        window.location.href = "login.html";
+
+    }else{
+
+        // show error message
+        alert(data);
+
+    }
+
+})
+.catch(error => {
+    console.error("Error:", error);
+});
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
