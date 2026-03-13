@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
+
 <title>Student Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style/style.css">
 
 </head>
@@ -15,17 +16,91 @@
 <!-- HEADER -->
 
 <div class="nav">
+
 <img src="image/logo_.png" alt="logo" class="logo">
 
-<div style="color:white;font-size:20px;">
-Student Dashboard
+<div class="header-right">
+
+<!-- Profile icon -->
+<img src="image/user.png" class="profile-icon" id="profileBtn">
+
+</div>
+
+</div>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="profile-sidebar" id="profileSidebar">
+
+<div class="sidebar-top">
+
+<div class="profile-image-container">
+
+<img
+id="profileImage"
+src="image/default-profile.png"
+class="profile-image"
+onclick="openProfileUpload()">
+
+<input
+type="file"
+id="profileUpload"
+accept="image/*"
+style="display:none">
+
+</div>
+
+<h3 id="profileName"></h3>
+
+<p class="role" id="profileRole"></p>
+
+</div>
+
+
+
+<!-- COURSES SECTION -->
+
+<div class="course-section">
+
+<h4>Your Courses</h4>
+
+<div class="course-list">
+
+<div class="course-item">Java</div>
+<div class="course-item">Python</div>
+<div class="course-item">UX/UI</div>
+<div class="course-item">Graphic Design</div>
+
+</div>
+
+<button class="btn">+ Add Course</button>
+
+</div>
+
+
+
+<!-- SIDEBAR BUTTONS -->
+
+<div class="sidebar-bottom">
+
+<button class="profile-btn" onclick="goToProfile()">
+Go to Profile
+</button>
+
+<button class="logout-btn" onclick="logoutUser()">
+Logout
+</button>
+
 </div>
 
 </div>
 
-<!-- MAIN CONTENT -->
 
-<div style="padding:60px;text-align:center;">
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<div class="home-content">
 
 <h1>Welcome Student 👋</h1>
 
@@ -41,11 +116,18 @@ Student Dashboard
 
 </div>
 
+
+
+
 <!-- FOOTER -->
 
 <footer>
 &copy;2026 All rights reserved!
 </footer>
+
+<!-- Main Script -->
+
+<script src="script/script.js"></script>
 
 </body>
 

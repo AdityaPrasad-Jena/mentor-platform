@@ -1,3 +1,7 @@
+/* =====================================================
+GLOBAL RESET
+===================================================== */
+
 *{
 margin:0;
 padding:0;
@@ -6,19 +10,31 @@ box-sizing:border-box;
 
 body{
 font-family:'Poppins',sans-serif;
-background:#f3f4f6;
-padding-bottom:90px;
+min-height:100vh;
+display:flex;
+flex-direction:column;
 }
 
-/* NAVBAR */
+main{
+flex:1;
+}
+
+
+
+/* =====================================================
+NAVBAR
+===================================================== */
 
 .nav{
 background:black;
 display:flex;
 align-items:center;
+justify-content:space-between;
 padding:0 40px;
-height:80px;
+height:90px;
 }
+
+/* website logo */
 
 .logo{
 width:50px;
@@ -27,7 +43,39 @@ border-radius:50%;
 object-fit:cover;
 }
 
-/* CARD */
+
+
+/* =====================================================
+HEADER RIGHT SECTION (PROFILE ICON AREA)
+===================================================== */
+
+.header-right{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+/* profile image shown in header */
+
+.profile-icon{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+cursor:pointer;
+border:2px solid #e5e7eb;
+transition:0.3s;
+}
+
+.profile-icon:hover{
+transform:scale(1.05);
+}
+
+
+
+/* =====================================================
+FORM CARD (LOGIN / REGISTER)
+===================================================== */
 
 .card{
 width:420px;
@@ -69,7 +117,11 @@ font-size:16px;
 color:#888;
 }
 
-/* BUTTON */
+
+
+/* =====================================================
+BUTTONS
+===================================================== */
 
 .btn{
 margin-top:20px;
@@ -86,6 +138,12 @@ cursor:pointer;
 .btn:hover{
 background:#1e40af;
 }
+
+
+
+/* =====================================================
+INPUT GROUP
+===================================================== */
 
 .input-group{
 display:flex;
@@ -115,7 +173,11 @@ color:red;
 margin-top:4px;
 }
 
-/* DIVIDER */
+
+
+/* =====================================================
+DIVIDER
+===================================================== */
 
 .divider{
 text-align:center;
@@ -124,7 +186,11 @@ font-size:14px;
 color:#666;
 }
 
-/* SOCIAL LOGIN */
+
+
+/* =====================================================
+SOCIAL LOGIN
+===================================================== */
 
 .social-login{
 display:flex;
@@ -154,7 +220,11 @@ width:22px;
 height:22px;
 }
 
-/* LOGIN LINK */
+
+
+/* =====================================================
+LOGIN LINK
+===================================================== */
 
 .login-link{
 margin-top:18px;
@@ -172,7 +242,11 @@ font-weight:600;
 text-decoration:underline;
 }
 
-/* FOOTER */
+
+
+/* =====================================================
+FOOTER
+===================================================== */
 
 footer{
 font-size:16px;
@@ -181,9 +255,172 @@ color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-height:80px;
-position:fixed;
-bottom:0;
-left:0;
+height:90px;
 width:100%;
+margin-top:40px;
+}
+
+
+
+/* =====================================================
+PROFILE SIDEBAR
+===================================================== */
+
+.profile-sidebar{
+position:fixed;
+top:0;
+right:-320px;
+width:320px;
+height:100%;
+background:white;
+box-shadow:-4px 0 20px rgba(0,0,0,0.1);
+padding:25px;
+transition:0.4s;
+z-index:1000;
+}
+
+/* sidebar open state */
+
+.profile-sidebar.active{
+right:0;
+}
+
+
+
+/* =====================================================
+SIDEBAR TOP (PROFILE AREA)
+===================================================== */
+
+.sidebar-top{
+text-align:center;
+margin-bottom:30px;
+}
+
+/* PROFILE IMAGE (CIRCLE FRAME) */
+
+.profile-image{
+width:90px;
+height:90px;
+border-radius:50%;
+object-fit:cover;
+cursor:pointer;
+border:3px solid #eee;
+display:block;
+margin:0 auto 10px auto;
+}
+
+
+
+/* USER ROLE TEXT */
+
+.role{
+color:#6b7280;
+font-size:14px;
+}
+
+
+
+/* =====================================================
+COURSE LIST
+===================================================== */
+
+.course-list{
+margin-top:15px;
+max-height:260px;
+overflow-y:auto;
+width:100%;
+}
+
+.course-item{
+padding:10px 0;
+border-bottom:1px solid #e5e7eb;
+font-size:18px;
+cursor:pointer;
+}
+
+.course-item:last-child{
+border-bottom:none;
+}
+
+
+
+/* =====================================================
+SIDEBAR BOTTOM BUTTONS
+===================================================== */
+
+.sidebar-bottom{
+display:flex;
+gap:12px;
+margin-top:20px;
+}
+
+/* profile button */
+
+.profile-btn{
+flex:1;
+background:#00a92de2;
+color:white;
+border:none;
+padding:12px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+transition:0.2s;
+}
+
+.profile-btn:hover{
+background:#07652a;
+}
+
+/* logout button */
+
+.logout-btn{
+flex:1;
+background:#dd0000;
+color:white;
+border:none;
+padding:12px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+transition:0.2s;
+}
+
+.logout-btn:hover{
+background:#920c0c;
+}
+
+
+
+/* =====================================================
+ADD COURSE BUTTON
+===================================================== */
+
+.add-course-btn{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+margin-top:18px;
+transition:0.2s;
+}
+
+.add-course-btn:hover{
+background:#1d4ed8;
+}
+
+
+
+/* =====================================================
+HOME PAGE CONTENT
+===================================================== */
+
+.home-content{
+padding:60px;
+text-align:center;
+background:#f8fafc;
+min-height:500px;
 }

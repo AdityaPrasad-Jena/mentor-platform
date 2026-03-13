@@ -123,11 +123,11 @@ Don't have account?
 LOGIN FLOW
 
 1. User clicks login
-2. Prevent default form reload
-3. Send email & password to backend
+2. Prevent page reload
+3. Send email + password to Spring Boot
 4. Backend verifies credentials
-5. Backend returns role (student / mentor)
-6. Redirect user to correct dashboard
+5. Backend returns user data
+6. Redirect to correct dashboard
 */
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -145,7 +145,6 @@ password: document.getElementById("password").value
 
 };
 
-
 fetch("http://localhost:8080/api/login", {
 
 method: "POST",
@@ -158,27 +157,45 @@ body: JSON.stringify(loginData)
 
 })
 
-.then(response => response.text())   // convert server response to text
+.then(response => response.json())
 
 .then(data => {
 
-console.log("Server response:", data); // debugging
+console.log("Server response:", data);
 
-data = data.trim().toLowerCase();
 
-if(data === "student"){
+// CHECK IF LOGIN FAILED
+
+if(data.error){
+
+alert(data.error);
+return;
+
+}
+
+
+// STORE USER DATA
+
+localStorage.setItem(
+"userName",
+data.firstName + " " + data.lastName
+);
+
+localStorage.setItem("role", data.role);
+
+localStorage.setItem("userEmail", loginData.email);
+
+// REDIRECT BASED ON ROLE
+
+if(data.role.toLowerCase() === "student"){
 
 window.location.href = "student-home.html";
 
 }
-else if(data === "mentor"){
+
+else if(data.role.toLowerCase() === "mentor"){
 
 window.location.href = "mentor-home.html";
-
-}
-else{
-
-alert(data);
 
 }
 

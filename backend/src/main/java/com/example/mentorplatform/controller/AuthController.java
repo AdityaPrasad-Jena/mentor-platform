@@ -7,6 +7,10 @@ import com.example.mentorplatform.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.*;
+import java.io.IOException;
+import java.util.UUID;
 
 import java.util.Optional;
 
@@ -49,10 +53,10 @@ public class AuthController {
 
 
     // ================= LOGIN API =================
-    // This API verifies user login credentials
+// This API verifies user login credentials
 
     @PostMapping("/login")
-    public String loginUser(@RequestBody User loginUser){
+    public Object loginUser(@RequestBody User loginUser){
 
         Optional<User> userOptional = userRepository.findByEmail(loginUser.getEmail());
 
@@ -66,10 +70,40 @@ public class AuthController {
 
         if(encoder.matches(loginUser.getPassword(), user.getPassword())){
 
-            return user.getRole(); // return role instead of message
+            // create response object
+            java.util.Map<String, String> response = new java.util.HashMap<>();
+
+            response.put("firstName", user.getFirstName());
+            response.put("lastName", user.getLastName());
+            response.put("role", user.getRole());
+
+            return response;
         }
 
         return "Invalid password";
     }
 
+    // ================= PROFILE IMAGE UPLOAD =================
+
+    @PostMapping("/uploadProfileImage")
+    public String uploadProfileImage(@RequestParam("image") MultipartFile file) throws IOException {
+
+        // generate unique filename
+        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+        // folder where images will be stored
+        Path uploadPath = Paths.get("uploads");
+
+        // create folder if not exists
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        // save file
+        Files.copy(file.getInputStream(), uploadPath.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+
+        return fileName;
+    }
+
 }
+
