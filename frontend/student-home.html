@@ -31,7 +31,7 @@
 
 <!-- ================= SIDEBAR ================= -->
 
-<div class="profile-sidebar" id="profileSidebar">
+<div class="profile-sidebar" id="profileSidebar" onclick="event.stopPropagation()">
 
 <div class="sidebar-top">
 
@@ -57,7 +57,25 @@ style="display:none">
 
 </div>
 
+<!-- COURSE SELECTOR PANEL -->
 
+<div class="course-panel" id="coursePanel" onclick="event.stopPropagation()">
+
+<div class="course-panel-header">
+
+<input
+type="text"
+placeholder="Search course..."
+id="courseSearch"
+class="course-search">
+
+<span class="close-course-panel" onclick="closeCoursePanel()">✕</span>
+
+</div>
+
+<div class="course-results" id="courseResults"></div>
+
+</div>
 
 <!-- COURSES SECTION -->
 
@@ -65,16 +83,15 @@ style="display:none">
 
 <h4>Your Courses</h4>
 
-<div class="course-list">
+<p id="emptyMessage" class="empty-message">
+No courses selected
+</p>
 
-<div class="course-item">Java</div>
-<div class="course-item">Python</div>
-<div class="course-item">UX/UI</div>
-<div class="course-item">Graphic Design</div>
+<div class="course-list" id="courseList"></div>
 
-</div>
-
-<button class="btn">+ Add Course</button>
+<button class="add-course-btn" onclick="openCoursePanel()">
++ Add Course
+</button>
 
 </div>
 
