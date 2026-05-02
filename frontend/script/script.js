@@ -90,11 +90,10 @@ sidebar.classList.toggle("active");
 document.addEventListener("click", function(event){
 
 const coursePanel = document.getElementById("coursePanel");
-
 const isPanelOpen = coursePanel && coursePanel.classList.contains("active");
 
 if(isPanelOpen){
-return; // 🚀 DO NOT close sidebar if panel is open
+return;
 }
 
 if(
@@ -110,7 +109,7 @@ sidebar.classList.remove("active");
 
 
 /* =====================================================
-COURSE STATE (MAIN FIX)
+COURSE STATE
 ===================================================== */
 
 let userCourses = [];
@@ -152,17 +151,21 @@ if(headerImage && savedImage){
 headerImage.src = savedImage;
 }
 
-/* LOAD COURSES */
+/* LOAD COURSES FROM BACKEND */
 
-const savedCourses = localStorage.getItem("courses_" + userEmail);
-
-if(savedCourses){
-userCourses = JSON.parse(savedCourses);
-}
-
-renderCourses();
-
+fetch(`http://localhost:8080/api/courses/get?email=${userEmail}`)
+.then(res => res.json())
+.then(data => {
+    userCourses = data.map(item =>
+        typeof item === "string" ? item : item.courseName
+    );
+    renderCourses();
+})
+.catch(err => {
+    console.error("Error loading courses:", err);
 });
+
+}); // ✅ FIXED (important closing bracket)
 
 
 /* =====================================================
@@ -221,6 +224,7 @@ headerImage.src = e.target.result;
 
 const userEmail = localStorage.getItem("userEmail");
 localStorage.setItem("profileImage_" + userEmail, e.target.result);
+
 };
 
 reader.readAsDataURL(file);
@@ -243,11 +247,10 @@ panel.classList.add("active");
 }
 
 if(sidebar){
-sidebar.classList.add("active"); // keep sidebar open
+sidebar.classList.add("active");
 }
 
 renderCourseResults(allCourses);
-
 }
 
 function closeCoursePanel(){
@@ -263,18 +266,10 @@ AVAILABLE COURSES
 ===================================================== */
 
 const allCourses = [
-"Java",
-"Python",
-"UX/UI",
-"Graphic Design",
-"Machine Learning",
-"Data Science",
-"Web Development",
-"Cyber Security",
-"Cloud Computing",
-"Artificial Intelligence",
-"Blockchain",
-"DevOps"
+"Java","Python","UX/UI","Graphic Design",
+"Machine Learning","Data Science","Web Development",
+"Cyber Security","Cloud Computing","Artificial Intelligence",
+"Blockchain","DevOps"
 ];
 
 
@@ -327,7 +322,7 @@ container.appendChild(row);
 
 
 /* =====================================================
-RENDER USER COURSES (CORE FIX)
+RENDER USER COURSES
 ===================================================== */
 
 function renderCourses(){
@@ -343,7 +338,7 @@ if(userCourses.length === 0){
 emptyMsg.textContent = "No courses selected";
 } else {
 emptyMsg.textContent = "";
-};
+}
 
 userCourses.forEach(course => {
 
@@ -369,10 +364,25 @@ function addCourse(course){
 
 if(userCourses.includes(course)) return;
 
-userCourses.push(course);
+const userEmail = localStorage.getItem("userEmail");
 
-saveCourses();
+/* Optimistic UI */
+userCourses.push(course);
 renderCourses();
+
+fetch("http://localhost:8080/api/courses/add", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        userEmail: userEmail,
+        courseName: course
+    })
+})
+.catch(err => {
+    console.error("Add failed:", err);
+});
 
 }
 
@@ -385,21 +395,17 @@ function removeCourse(event, course){
 
 event.stopPropagation();
 
-userCourses = userCourses.filter(c => c !== course);
+const userEmail = localStorage.getItem("userEmail");
 
-saveCourses();
+/* Optimistic UI */
+userCourses = userCourses.filter(c => c !== course);
 renderCourses();
 
-}
-
-
-/* =====================================================
-SAVE COURSES (LOCAL STORAGE)
-===================================================== */
-
-function saveCourses(){
-
-const userEmail = localStorage.getItem("userEmail");
-localStorage.setItem("courses_" + userEmail, JSON.stringify(userCourses));
+fetch(`http://localhost:8080/api/courses/remove?email=${userEmail}&courseName=${course}`, {
+    method: "DELETE"
+})
+.catch(err => {
+    console.error("Delete failed:", err);
+});
 
 }
