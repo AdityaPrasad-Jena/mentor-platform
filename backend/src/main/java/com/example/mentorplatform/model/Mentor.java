@@ -16,6 +16,7 @@ public class Mentor {
     private int experience;
     private double rating;
     private int totalReviews;
+    private String profileImage;
 
     public Mentor() {}
 
@@ -38,4 +39,12 @@ public class Mentor {
 
     public int getTotalReviews() { return totalReviews; }
     public void setTotalReviews(int totalReviews) { this.totalReviews = totalReviews; }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
 }
