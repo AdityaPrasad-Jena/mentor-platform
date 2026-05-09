@@ -848,3 +848,119 @@ Failed to load mentors
 });
 
 }
+
+
+/* =====================================================
+MENTOR TAB SWITCHING
+===================================================== */
+
+function switchMentorTab(tab, element){
+
+/* REMOVE OLD ACTIVE TAB */
+
+document.querySelectorAll(".mentor-tab")
+
+.forEach(tabItem => {
+
+tabItem.classList.remove("active-tab");
+
+});
+
+
+/* ADD NEW ACTIVE TAB */
+
+element.classList.add("active-tab");
+
+
+/* WORKSPACE */
+
+const workspace =
+document.getElementById("mentorWorkspace");
+
+if(!workspace) return;
+
+
+/* =====================================================
+VIDEOS
+===================================================== */
+
+if(tab === "videos"){
+
+workspace.innerHTML = `
+
+<h2>
+Video Lessons
+</h2>
+
+<p>
+Upload and manage your course videos here.
+</p>
+
+`;
+
+}
+
+
+/* =====================================================
+MATERIALS
+===================================================== */
+
+else if(tab === "materials"){
+
+workspace.innerHTML = `
+
+<h2>
+Materials
+</h2>
+
+<p>
+Upload PDFs, notes, assignments and study resources.
+</p>
+
+`;
+
+}
+
+
+/* =====================================================
+DISCUSSIONS
+===================================================== */
+
+else if(tab === "discussions"){
+
+workspace.innerHTML = `
+
+<h2>
+Discussions
+</h2>
+
+<p>
+Answer student doubts and manage course discussions.
+</p>
+
+`;
+
+}
+
+
+/* =====================================================
+LIVE CLASSES
+===================================================== */
+
+else if(tab === "live"){
+
+workspace.innerHTML = `
+
+<h2>
+Live Classes
+</h2>
+
+<p>
+Start and manage live mentoring sessions here.
+</p>
+
+`;
+
+}
+
+}

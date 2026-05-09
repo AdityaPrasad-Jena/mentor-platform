@@ -3,49 +3,281 @@
 <html>
 
 <head>
+
 <title>Mentor Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- GOOGLE FONT -->
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+>
+
+<!-- CSS -->
+
 <link rel="stylesheet" href="style/style.css">
 
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- =====================================================
+NAVBAR
+===================================================== -->
 
 <div class="nav">
-<img src="image/logo_.png" alt="logo" class="logo">
 
-<div style="color:white;font-size:20px;">
-Mentor Dashboard
+<img
+src="image/logo_.png"
+alt="logo"
+class="logo"
+>
+
+<div class="header-right">
+
+<img
+src="image/default-profile.png"
+id="profileBtn"
+class="profile-icon"
+alt="profile"
+>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+PROFILE SIDEBAR
+===================================================== -->
+
+<div
+class="profile-sidebar"
+id="profileSidebar"
+>
+
+<!-- TOP -->
+
+<div class="sidebar-top">
+
+<img
+src="image/default-profile.png"
+id="profileImage"
+class="profile-image"
+onclick="openProfileUpload()"
+>
+
+<h2 id="profileName">
+Mentor Name
+</h2>
+
+<p
+class="role"
+id="profileRole"
+>
+Mentor
+</p>
+
+<input
+type="file"
+id="profileUpload"
+hidden
+accept="image/*"
+>
+
+</div>
+
+
+<!-- =====================================================
+COURSE SECTION
+===================================================== -->
+
+<div class="course-section">
+
+<!-- CREATE COURSE BUTTON -->
+
+<button
+class="add-course-btn"
+onclick="openCreateCoursePanel()"
+>
+
++ Create Course
+
+</button>
+
+<!-- EMPTY MESSAGE -->
+
+<p
+class="empty-message"
+id="emptyMessage"
+>
+
+No courses created
+
+</p>
+
+<!-- COURSE LIST -->
+
+<div
+class="course-list"
+id="courseList"
+>
+
 </div>
 
 </div>
 
-<!-- MAIN CONTENT -->
 
-<div style="padding:60px;text-align:center;">
+<!-- =====================================================
+BOTTOM BUTTONS
+===================================================== -->
 
-<h1>Welcome Mentor 👋</h1>
+<div class="sidebar-bottom">
 
-<p>This is the mentor homepage.</p>
+<button
+class="profile-btn"
+onclick="goToProfile()"
+>
+Go To Profile
+</button>
 
-<br>
-
-<button class="btn">Create Course</button>
-
-<br><br>
-
-<button class="btn">Manage Sessions</button>
+<button
+class="logout-btn"
+onclick="logoutUser()"
+>
+Logout
+</button>
 
 </div>
 
-<!-- FOOTER -->
+</div>
 
-<footer>
-&copy;2026 All rights reserved!
-</footer>
+
+<!-- =====================================================
+CREATE COURSE PANEL
+===================================================== -->
+
+<div
+class="course-panel"
+id="createCoursePanel"
+>
+
+<div class="course-panel-header">
+
+<h3>Create Course</h3>
+
+<span
+class="close-course-panel"
+onclick="closeCreateCoursePanel()"
+>
+✕
+</span>
+
+</div>
+
+
+<!-- COURSE NAME -->
+
+<input
+type="text"
+id="newCourseInput"
+class="course-search"
+placeholder="Enter course name"
+>
+
+<button
+class="btn"
+onclick="createCourse()"
+>
+
+Create Course
+
+</button>
+
+</div>
+
+
+<!-- =====================================================
+HOME CONTENT
+===================================================== -->
+
+<div class="home-content">
+
+<h1 id="welcomeText">
+Welcome Mentor 👋
+</h1>
+
+<p class="mentor-dashboard-subtitle">
+
+Select a course to manage content
+
+</p>
+
+
+<!-- =====================================================
+TOP TABS
+===================================================== -->
+
+<div class="mentor-tabs">
+
+<div
+class="mentor-tab active-tab"
+onclick="switchMentorTab('videos', this)"
+>
+Video Lessons
+</div>
+
+<div
+class="mentor-tab"
+onclick="switchMentorTab('materials', this)"
+>
+Materials
+</div>
+
+<div
+class="mentor-tab"
+onclick="switchMentorTab('discussions', this)"
+>
+Discussions
+</div>
+
+<div
+class="mentor-tab"
+onclick="switchMentorTab('live', this)"
+>
+Live Classes
+</div>
+
+</div>
+
+
+<!-- =====================================================
+WORKSPACE AREA
+===================================================== -->
+
+<div
+class="mentor-workspace"
+id="mentorWorkspace"
+>
+
+<h2>
+Video Lessons
+</h2>
+
+<p>
+Upload and manage your course videos here.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+SCRIPT
+===================================================== -->
+
+<script src="script/script.js"></script>
 
 </body>
 
