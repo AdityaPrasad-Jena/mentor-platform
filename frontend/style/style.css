@@ -439,70 +439,421 @@ background:#920c0c;
 
 
 /* =====================================================
-COURSE PANEL (FLOATING SELECTOR)
+MODAL OVERLAY
 ===================================================== */
 
-.course-panel{
+.course-modal-overlay{
+
 position:fixed;
-right:340px;
-top:100px;
 
-width:380px;
-height:500px;
+top:0;
+left:0;
 
-background:white;
-border-radius:12px;
+width:100%;
+height:100%;
 
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+background:rgba(0,0,0,0.45);
 
-padding:20px;
+backdrop-filter:blur(6px);
 
 display:none;
-z-index:999;
-}
 
-.course-panel.active{
-display:block;
-}
-
-.course-panel-header{
-display:flex;
+justify-content:center;
 align-items:center;
-justify-content:space-between;
-margin-bottom:15px;
+
+z-index:9999;
+
 }
 
-.course-search{
-width:100%;
-padding:10px;
-border-radius:6px;
-border:1px solid #ddd;
-font-size:14px;
+
+/* ACTIVE */
+
+.course-modal-overlay.active{
+display:flex;
 }
+
+
+/* =====================================================
+MODAL BOX
+===================================================== */
+
+.course-modal{
+
+width:760px;
+
+max-width:92%;
+
+background:white;
+
+border-radius:28px;
+
+padding:35px;
+
+box-shadow:0 25px 70px rgba(0,0,0,0.2);
+
+animation:modalFade 0.25s ease;
+
+}
+
+
+/* =====================================================
+MODAL ANIMATION
+===================================================== */
+
+@keyframes modalFade{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+/* =====================================================
+MODAL HEADER
+===================================================== */
+
+.course-modal-header{
+
+display:flex;
+
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:25px;
+
+}
+
+
+.course-modal-header h2{
+
+font-size:32px;
+
+font-weight:700;
+
+color:#111827;
+
+}
+
+/* =====================================================
+CLOSE BUTTON
+===================================================== */
 
 .close-course-panel{
+
+font-size:34px;
+
 cursor:pointer;
-font-size:18px;
-margin-left:10px;
+
+transition:0.25s;
+
+color:#374151;
+
 }
 
-.course-results{
-margin-top:15px;
-max-height:400px;
-overflow-y:auto;
+
+.close-course-panel:hover{
+
+transform:rotate(90deg);
+
 }
 
-.course-option{
+
+/* =====================================================
+SEARCH INPUT
+===================================================== */
+
+.course-search{
+
+width:100%;
+
+height:50px;
+
+padding:0 16px;
+
+border-radius:14px;
+
+border:1px solid #d1d5db;
+
+outline:none;
+
+font-size:14px;
+
+font-family:'Poppins', sans-serif;
+
+margin-top:6px;
+
+transition:0.25s;
+
+}
+
+
+.course-search:focus{
+
+border-color:#2563eb;
+
+box-shadow:0 0 0 4px rgba(37,99,235,0.1);
+
+}
+
+
+/* =====================================================
+SUGGESTED TITLE
+===================================================== */
+
+.suggested-title{
+
+margin-top:30px;
+margin-bottom:20px;
+
+font-size:17px;
+
+font-weight:500;
+
+color:#6b7280;
+
+}
+
+
+/* =====================================================
+SUBJECT CHIP CONTAINER
+===================================================== */
+
+.subject-chip-container{
+
 display:flex;
-justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #eee;
+
+flex-wrap:wrap;
+
+gap:14px;
+
+margin-bottom:30px;
+
 }
 
-.add-course-icon{
-color:#2563eb;
-font-weight:bold;
+
+/* =====================================================
+SUBJECT CHIP
+===================================================== */
+
+.subject-chip{
+
+padding:11px 20px;
+
+border-radius:999px;
+
+background:#f3f4f6;
+
+border:1px solid #e5e7eb;
+
+font-size:14px;
+
+font-weight:500;
+
 cursor:pointer;
+
+transition:0.25s;
+
+animation:chipFade 0.35s ease;
+
+}
+
+
+/* HOVER */
+
+.subject-chip:hover{
+
+background:#111827;
+
+color:white;
+
+transform:translateY(-2px);
+
+}
+
+
+/* =====================================================
+CHIP ANIMATION
+===================================================== */
+
+@keyframes chipFade{
+
+from{
+opacity:0;
+transform:translateY(8px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+/* =====================================================
+CREATE SUBJECT BUTTON
+===================================================== */
+
+/* .create-subject-btn{
+
+width:240px;
+
+padding:14px 18px;
+
+border-radius:14px;
+
+font-size:14px;
+
+margin-top:12px;
+
+background:#2563eb;
+
+color:white;
+
+display:block;
+
+margin-left:auto;
+margin-right:auto;
+
+} */
+
+
+.create-subject-btn{
+
+width:240px;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+font-size:15px;
+
+font-weight:600;
+
+margin-top:auto;
+
+background:#2563eb;
+
+color:white;
+
+display:block;
+
+margin-left:auto;
+margin-right:auto;
+
+border:none;
+
+cursor:pointer;
+
+transition:0.25s;
+
+}
+
+.create-subject-btn:hover{
+
+background:#1d4ed8;
+
+transform:translateY(-1px);
+
+}
+
+
+/* =====================================================
+COURSE DESCRIPTION
+===================================================== */
+
+.course-description{
+
+width:100%;
+
+height:150px;
+
+padding:16px;
+
+border-radius:16px;
+
+border:1px solid #d1d5db;
+
+outline:none;
+
+font-size:15px;
+
+font-family:'Poppins', sans-serif;
+
+resize:none;
+
+margin-top:10px;
+margin-bottom:25px;
+
+transition:0.25s;
+
+}
+
+
+.course-description:focus{
+
+border-color:#2563eb;
+
+box-shadow:0 0 0 4px rgba(37,99,235,0.1);
+
+}
+
+
+/* =====================================================
+FORM BUTTONS
+===================================================== */
+
+.course-form-buttons{
+
+display:flex;
+
+justify-content:flex-end;
+
+gap:14px;
+
+margin-top:20px;
+
+}
+
+
+/* =====================================================
+SECONDARY BUTTON
+===================================================== */
+
+.secondary-btn{
+
+padding:12px 18px;
+
+border:none;
+
+border-radius:12px;
+
+background:#e5e7eb;
+
+cursor:pointer;
+
+font-weight:500;
+
+font-size:15px;
+
+transition:0.25s;
+
+}
+
+
+.secondary-btn:hover{
+
+background:#d1d5db;
+
+transform:translateY(-1px);
+
 }
 
 
@@ -823,5 +1174,148 @@ color:#6b7280;
 margin-top:30px;
 
 margin-bottom:45px;
+
+}
+
+/* =====================================================
+MENTOR COURSE DESCRIPTION
+===================================================== */
+
+.mentor-course-description{
+
+width:100%;
+
+height:120px;
+
+padding:16px;
+
+border-radius:16px;
+
+border:1px solid #d1d5db;
+
+outline:none;
+
+font-size:15px;
+
+font-family:'Poppins', sans-serif;
+
+resize:none;
+
+margin-top:6px;
+margin-bottom:4px;
+
+transition:0.25s;
+
+}
+
+
+.mentor-course-description:focus{
+
+border-color:#2563eb;
+
+box-shadow:0 0 0 4px rgba(37,99,235,0.1);
+
+}
+
+
+/* =====================================================
+MENTOR COURSE FORM BUTTONS
+===================================================== */
+
+.mentor-course-form-buttons{
+
+display:flex;
+
+justify-content:flex-end;
+
+align-items:center;
+
+gap:18px;
+
+margin-top:18px;
+
+}
+
+.course-form-group{
+
+margin-bottom:10px;
+
+}
+
+.course-form-group label{
+
+font-size:15px;
+
+font-weight:500;
+
+color:#111827;
+
+}
+
+
+/* =====================================================
+MENTOR BACK BUTTON
+===================================================== */
+
+.mentor-back-btn{
+
+width:130px;
+
+height:45px;
+
+border:none;
+
+border-radius:14px;
+
+background:#e5e7eb;
+
+color:#111827;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.25s;
+
+}
+
+
+.mentor-back-btn:hover{
+
+background:#4a4a4a41;
+
+}
+
+
+/* =====================================================
+MENTOR SAVE BUTTON
+===================================================== */
+
+.mentor-save-btn{
+
+width: 130px;
+    
+height: 45px;
+
+border:none;
+
+border-radius:14px;
+
+background:#2563eb;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.25s;
+
+}
+
+
+.mentor-save-btn:hover{
+
+background:#1d4ed8;
 
 }

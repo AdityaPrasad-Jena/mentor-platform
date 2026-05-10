@@ -56,7 +56,9 @@ class="profile-sidebar"
 id="profileSidebar"
 >
 
-<!-- TOP -->
+<!-- =====================================================
+SIDEBAR TOP
+===================================================== -->
 
 <div class="sidebar-top">
 
@@ -94,18 +96,15 @@ COURSE SECTION
 
 <div class="course-section">
 
-<!-- CREATE COURSE BUTTON -->
-
 <button
 class="add-course-btn"
 onclick="openCreateCoursePanel()"
 >
 
-+ Create Course
++ Add Course
 
 </button>
 
-<!-- EMPTY MESSAGE -->
 
 <p
 class="empty-message"
@@ -116,7 +115,6 @@ No courses created
 
 </p>
 
-<!-- COURSE LIST -->
 
 <div
 class="course-list"
@@ -154,17 +152,28 @@ Logout
 
 
 <!-- =====================================================
-CREATE COURSE PANEL
+ADD COURSE MODAL
 ===================================================== -->
 
 <div
-class="course-panel"
+class="course-modal-overlay"
+id="courseModalOverlay"
+>
+
+<div
+class="course-modal"
 id="createCoursePanel"
 >
 
-<div class="course-panel-header">
+<!-- =====================================================
+MODAL HEADER
+===================================================== -->
 
-<h3>Create Course</h3>
+<div class="course-modal-header">
+
+<h2 id="panelTitle">
+Add Course
+</h2>
 
 <span
 class="close-course-panel"
@@ -176,23 +185,136 @@ onclick="closeCreateCoursePanel()"
 </div>
 
 
-<!-- COURSE NAME -->
+<!-- =====================================================
+SUBJECT SELECTION STEP
+===================================================== -->
+
+<div id="subjectSelectionStep">
+
+<!-- SEARCH -->
 
 <input
 type="text"
-id="newCourseInput"
+id="subjectSearch"
 class="course-search"
-placeholder="Enter course name"
+placeholder="Search Subject"
+oninput="filterSubjects()"
 >
+
+
+<!-- TITLE -->
+
+<h4 class="suggested-title">
+Suggested Subjects
+</h4>
+
+
+<!-- SUBJECT CHIPS -->
+
+<div
+class="subject-chip-container"
+id="subjectResults"
+>
+
+</div>
+
+
+<!-- CREATE SUBJECT -->
 
 <button
-class="btn"
-onclick="createCourse()"
+class="mentor-secondary-btn create-subject-btn"
+onclick="openCustomCourseForm()"
 >
 
-Create Course
++ Create New Subject
 
 </button>
+
+</div>
+
+
+<!-- =====================================================
+COURSE FORM STEP
+===================================================== -->
+
+<div
+id="courseFormStep"
+style="display:none;"
+>
+
+<!-- SUBJECT -->
+
+<div class="course-form-group">
+
+<label>
+Subject
+</label>
+
+<input
+type="text"
+id="selectedSubject"
+class="course-search"
+readonly
+>
+
+</div>
+
+
+<!-- COURSE TITLE -->
+
+<div class="course-form-group">
+
+<label>
+Course Title
+</label>
+
+<input
+type="text"
+id="courseTitle"
+class="course-search"
+placeholder="Example: Java for Beginners"
+>
+
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="course-form-group">
+
+<label>
+Description
+</label>
+
+<textarea
+id="courseDescription"
+class="mentor-course-description"
+placeholder="Write course description..."
+></textarea>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="mentor-course-form-buttons">
+
+<button
+class="mentor-back-btn"
+onclick="backToSubjectSelection()"
+>
+Back
+</button>
+
+<button class="mentor-save-btn">
+Save Course
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -252,7 +374,7 @@ Live Classes
 
 
 <!-- =====================================================
-WORKSPACE AREA
+WORKSPACE
 ===================================================== -->
 
 <div

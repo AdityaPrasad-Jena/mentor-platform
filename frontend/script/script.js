@@ -964,3 +964,288 @@ Start and manage live mentoring sessions here.
 }
 
 }
+
+/* =====================================================
+AVAILABLE SUBJECTS
+===================================================== */
+
+const availableSubjects = [
+
+"Java",
+"Python",
+"Machine Learning",
+"UI/UX",
+"Graphic Design",
+"Data Science",
+"Cyber Security",
+"Web Development",
+"Cloud Computing",
+"Artificial Intelligence",
+"Blockchain",
+"DevOps"
+
+];
+
+
+/* =====================================================
+OPEN ADD COURSE MODAL
+===================================================== */
+
+function openCreateCoursePanel(){
+
+/* CLOSE SIDEBAR */
+
+const sidebar =
+document.getElementById("profileSidebar");
+
+if(sidebar){
+sidebar.classList.remove("active");
+}
+
+
+/* OPEN MODAL */
+
+const overlay =
+document.getElementById("courseModalOverlay");
+
+if(overlay){
+overlay.classList.add("active");
+}
+
+
+/* RESET STATE */
+
+backToSubjectSelection();
+
+document.getElementById(
+"subjectSearch"
+).value = "";
+
+
+/* RESET FORM */
+
+document.getElementById(
+"selectedSubject"
+).value = "";
+
+document.getElementById(
+"courseTitle"
+).value = "";
+
+document.getElementById(
+"courseDescription"
+).value = "";
+
+
+/* READONLY RESET */
+
+document.getElementById(
+"selectedSubject"
+).readOnly = true;
+
+
+/* RENDER SUBJECTS */
+
+renderSubjectResults(availableSubjects);
+
+}
+
+
+/* =====================================================
+CLOSE ADD COURSE MODAL
+===================================================== */
+
+function closeCreateCoursePanel(){
+
+const overlay =
+document.getElementById("courseModalOverlay");
+
+if(overlay){
+overlay.classList.remove("active");
+}
+
+
+/* RESET TO STEP 1 */
+
+backToSubjectSelection();
+
+
+/* CLEAR SEARCH */
+
+document.getElementById(
+"subjectSearch"
+).value = "";
+
+
+/* CLEAR FORM */
+
+document.getElementById(
+"selectedSubject"
+).value = "";
+
+document.getElementById(
+"courseTitle"
+).value = "";
+
+document.getElementById(
+"courseDescription"
+).value = "";
+
+
+/* RESET READONLY */
+
+document.getElementById(
+"selectedSubject"
+).readOnly = true;
+
+}
+
+
+/* =====================================================
+RENDER SUBJECT CHIPS
+===================================================== */
+
+function renderSubjectResults(subjects){
+
+const container =
+document.getElementById("subjectResults");
+
+if(!container) return;
+
+container.innerHTML = "";
+
+
+/* LOOP */
+
+subjects.forEach(subject => {
+
+const chip =
+document.createElement("div");
+
+chip.className = "subject-chip";
+
+chip.textContent = subject;
+
+
+/* CLICK */
+
+chip.addEventListener("click", function(){
+
+openCourseForm(subject);
+
+});
+
+
+container.appendChild(chip);
+
+});
+
+}
+
+
+/* =====================================================
+FILTER SUBJECTS
+===================================================== */
+
+function filterSubjects(){
+
+const query =
+document.getElementById("subjectSearch")
+.value
+.toLowerCase();
+
+
+const filteredSubjects =
+availableSubjects.filter(subject =>
+
+subject.toLowerCase().includes(query)
+
+);
+
+
+/* RENDER FILTERED */
+
+renderSubjectResults(filteredSubjects);
+
+}
+
+
+/* =====================================================
+OPEN COURSE FORM
+===================================================== */
+
+function openCourseForm(subject){
+
+/* HIDE STEP 1 */
+
+document.getElementById(
+"subjectSelectionStep"
+).style.display = "none";
+
+
+/* SHOW STEP 2 */
+
+document.getElementById(
+"courseFormStep"
+).style.display = "block";
+
+
+/* SET SUBJECT */
+
+const subjectInput =
+document.getElementById("selectedSubject");
+
+subjectInput.value = subject;
+
+
+/* LOCK SUBJECT */
+
+subjectInput.readOnly = true;
+
+}
+
+
+/* =====================================================
+BACK TO SUBJECTS
+===================================================== */
+
+function backToSubjectSelection(){
+
+/* SHOW SUBJECTS */
+
+document.getElementById(
+"subjectSelectionStep"
+).style.display = "block";
+
+
+/* HIDE FORM */
+
+document.getElementById(
+"courseFormStep"
+).style.display = "none";
+
+}
+
+
+/* =====================================================
+CREATE NEW SUBJECT FLOW
+===================================================== */
+
+function openCustomCourseForm(){
+
+/* OPEN FORM */
+
+openCourseForm("");
+
+
+/* ALLOW SUBJECT EDIT */
+
+const subjectInput =
+document.getElementById("selectedSubject");
+
+subjectInput.readOnly = false;
+
+subjectInput.placeholder =
+"Enter Subject Name";
+
+}
